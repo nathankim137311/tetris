@@ -8,11 +8,11 @@
   height: fit-content;
 }
 
-#game-container {
+#game-area {
   display: grid;
   grid-template: repeat(20, 1.65vw) / repeat(10, 1.65vw);
-  height: fit-content;
-  width: fit-content;
+  height: 600px;
+  width: 300px;
   border: white 1px solid;
 }
 
