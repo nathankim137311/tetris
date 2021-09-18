@@ -1,0 +1,30 @@
+@import "globals";
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: fit-content;
+}
+
+#game-container {
+  display: grid;
+  grid-template: repeat(20, 1.65vw) / repeat(10, 1.65vw);
+  height: fit-content;
+  width: fit-content;
+  border: white 1px solid;
+}
+
+.cell {
+  display: flex;
+  border-right: 1px red solid;
+  aspect-ratio: 1;
+  :last-child {
+    border-right: none;
+  }
+}
+
+#footer {
+  width: 100%;
+}
