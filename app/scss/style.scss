@@ -1,28 +1,51 @@
 @import "globals";
+@import "variables";
 
 .main-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: fit-content;
 }
 
-#game-area {
+#start {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: $darkgrey;
+  color: white;
+  a {
+    font-size: 1rem;
+    padding: 5px;
+  }
+  a:hover {
+    cursor: pointer;
+    background-color: white;
+    color: black;
+  }
+}
+
+#game-container {
+  margin-top: 20px;
   display: grid;
-  grid-template: repeat(20, 1.65vw) / repeat(10, 1.65vw);
+  grid-template-columns: repeat(10, auto);
+  box-sizing: initial;
   height: 600px;
   width: 300px;
   border: white 1px solid;
 }
 
+.tetromino {
+  background-color: blueviolet;
+}
+
 .cell {
-  display: flex;
-  border-right: 1px red solid;
-  aspect-ratio: 1;
-  :last-child {
-    border-right: none;
-  }
+  background-color: red;
+  height: 30px;
+  width: 30px;
 }
 
 #footer {
