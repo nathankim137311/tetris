@@ -96,61 +96,67 @@ let currentPosition = 3;
 // random shape function 
 function randomShape () {
   shape = tetrominos[Math.floor(Math.random() * tetrominos.length)];
-  draw(shape); 
+  determine(shape); 
   return shape;
 }
 
-// adds classlist and adds color to random tetromino
-function draw() {
+// adds classlist which adds color to tetromino
+function determine() {
   if (shape === tetrominos[0]) {
    shape = tBlock; 
    shape[Math.floor(Math.random() * 3)].forEach(index => {
       grid[currentPosition + index].classList.add('t-block');
       });
-      return shape;
+      return tBlock;
   } else if (shape === tetrominos[1]) {
     shape = lBlock; 
     shape[Math.floor(Math.random() * 3)].forEach(index => {
       grid[currentPosition + index].classList.add('l-block');
       });
-      return shape;
+      return lBlock;
   } else if (shape === tetrominos[2]) {
     shape = jBlock; 
     shape[Math.floor(Math.random() * 3)].forEach(index => {
       grid[currentPosition + index].classList.add('j-block');
       });
-      return shape;
+      return jBlock;
   } else if (shape === tetrominos[3]) {
     shape = oBlock; 
     shape[Math.floor(Math.random() * 3)].forEach(index => {
       grid[currentPosition + index].classList.add('o-block');
       });
-      return shape;
+      return oBlock;
   } else if (shape === tetrominos[4]) {
     shape = sBlock; 
     shape[Math.floor(Math.random() * 3)].forEach(index => {
       grid[currentPosition + index].classList.add('s-block');
       });
-      return shape;
+      return sBlock;
   } else if (shape === tetrominos[5]) {
     shape = zBlock;
     shape[Math.floor(Math.random() * 3)].forEach(index => {
       grid[currentPosition + index].classList.add('z-block');
       }); 
-      return shape;
+      return zBlock;
   } else if (shape === tetrominos[6]) {
     shape = iBlock; 
     shape[Math.floor(Math.random() * 3)].forEach(index => {
       grid[currentPosition + index].classList.add('i-block');
       });
-      return shape;
+      return iBlock;
   }
+}
+
+function randomRotations () {
+  Math.floor(Math.random() * 3); 
 }
 
 // keys rotate tetromino 
 window.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowUp') {
-    let rotations = draw()[count];
+    let count = randomRotations(); 
+    let tetromino = determine(); 
+    let rotations = tetromino[count];
     count++
     if (count === rotations.length) {
       count = 0; 
