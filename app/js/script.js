@@ -129,7 +129,7 @@ function colorTetromino (tetromino, rotateTetromino) {
   } 
 }
 
-// generates random tetromino with color
+// tetromino with color
 function generateTetromino () {
   colorTetromino(tetromino, rotateTetromino); 
 }
@@ -147,26 +147,40 @@ window.addEventListener('keydown', (e) => {
     rotateRight(); 
   } else if (e.key === 'ArrowDown') {
     rotateLeft(); 
-    // rotate counter-clockwise
   } else if (e.key === 'ArrowRight') {
-    // move right 
+    moveRight(); 
   } else if (e.key === 'ArrowLeft') {
     // move left 
   }
 });
 
 function rotateRight () {
-  let rotation = tetromino[currentRotation++ % tetromino.length];
-  console.log(rotation);
+  eraseTetromino(); 
+  let newRotation = tetromino[currentRotation++ % tetromino.length];
+  colorTetromino(tetromino, newRotation);  
+  if (currentRotation > 3) {
+    currentRotation = 0;
+  }
+  console.log(newRotation);
 }
 
 function rotateLeft () {
-  let rotation = tetromino[currentRotation--];
-  console.log(rotation); 
+  eraseTetromino(); 
+  let newRotation = tetromino[currentRotation--];
+  colorTetromino(tetromino, newRotation); 
   if (currentRotation < 0) {
     currentRotation = 3;
   }
+  console.log(newRotation); 
 }
+
+//function moveRight () {
+//  rotateTetromino.forEach(index => {
+//    grid[index + currentPosition];
+//    currentPosition++; 
+//  }); 
+//}
+
 
 
 // make the tetromino move down every second 
