@@ -111,37 +111,31 @@ body {
 }
 
 .t-block {
-  background-color: blueviolet;
+  background-color: #9900fc;
 }
 
 .l-block {
-  background-color: #f98133;
+  background-color: #feaa00;
 }
 
 .j-block {
-  background-color: #0023be;
+  background-color: #0000ff;
 }
 
 .o-block {
-  background-color: #d4cd7b;
+  background-color: #ffff00;
 }
 
 .s-block {
-  background-color: #b6131e;
+  background-color: #ff0002;
 }
 
 .z-block {
-  background-color: #548e63;
+  background-color: #00ff01;
 }
 
 .i-block {
-  background-color: #64c5dd;
-}
-
-.cell {
-  background-color: red;
-  height: 30px;
-  width: 30px;
+  background-color: #01ffff;
 }
 
 #footer {
