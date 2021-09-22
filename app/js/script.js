@@ -88,7 +88,7 @@ const iBlock = [
 
 const tetrominos = [tBlock, lBlock, jBlock, oBlock, sBlock, zBlock, iBlock];
 
-let currentPosition = 4; 
+let currentPosition = 0; 
 let currentRotation = 0; 
 
 // generate random shape
@@ -144,18 +144,21 @@ function eraseTetromino () {
 // tetromino controls 
 window.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowUp') {
+    eraseTetromino(); 
     rotateRight(); 
   } else if (e.key === 'ArrowDown') {
+    eraseTetromino(); 
     rotateLeft(); 
   } else if (e.key === 'ArrowRight') {
+    eraseTetromino(); 
     moveRight(); 
   } else if (e.key === 'ArrowLeft') {
-    // move left 
+    eraseTetromino();
+    moveLeft(); 
   }
 });
 
 function rotateRight () {
-  eraseTetromino(); 
   let newRotation = tetromino[currentRotation++ % tetromino.length];
   colorTetromino(tetromino, newRotation);  
   if (currentRotation > 3) {
@@ -165,7 +168,6 @@ function rotateRight () {
 }
 
 function rotateLeft () {
-  eraseTetromino(); 
   let newRotation = tetromino[currentRotation--];
   colorTetromino(tetromino, newRotation); 
   if (currentRotation < 0) {
@@ -174,23 +176,22 @@ function rotateLeft () {
   console.log(newRotation); 
 }
 
-//function moveRight () {
-//  rotateTetromino.forEach(index => {
-//    grid[index + currentPosition];
-//    currentPosition++; 
-//  }); 
-//}
+function moveRight () {
+  console.log(currentPosition++);
+  colorTetromino(tetromino, rotateTetromino); 
+}
 
-
+function moveLeft () {
+  console.log(currentPosition--); 
+  colorTetromino(tetromino, rotateTetromino); 
+}
 
 // make the tetromino move down every second 
-//timerID = setInterval(moveDown, 90000)
-//
-//function moveDown() {
-//  eraseTetromino(); 
-//  let tetromino = colorTetromino(); 
-//  console.log(tetromino); 
-//  currentPosition += 10; 
-//  colorTetromino(); 
-//}
+// timerID = setInterval(moveDown, 5000)
 
+function moveDown() {
+  eraseTetromino();  
+  currentPosition =+ 10; 
+  colorTetromino(tetromino, rotateTetromino); 
+  console.log(currentPosition); 
+}
