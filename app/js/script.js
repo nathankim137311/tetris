@@ -165,6 +165,7 @@ function rotateRight () {
     currentRotation = 0;
   }
   console.log(newRotation);
+  return newRotation; 
 }
 
 function rotateLeft () {
@@ -173,7 +174,8 @@ function rotateLeft () {
   if (currentRotation < 0) {
     currentRotation = 3;
   }
-  console.log(newRotation); 
+  console.log(newRotation);
+  return newRotation;  
 }
 
 function moveRight () {
@@ -187,11 +189,10 @@ function moveLeft () {
 }
 
 // make the tetromino move down every second 
-// timerID = setInterval(moveDown, 5000)
+// timerID = setInterval(moveDown, 1000)
 
 function moveDown() {
   eraseTetromino();  
-  currentPosition =+ 10; 
+  console.log(currentPosition += 10); 
   colorTetromino(tetromino, rotateTetromino); 
-  console.log(currentPosition); 
 }
