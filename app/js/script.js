@@ -158,41 +158,48 @@ window.addEventListener('keydown', (e) => {
   }
 });
 
+// rotate tetromino clockwise
 function rotateRight () {
-  let newRotation = tetromino[currentRotation++ % tetromino.length];
-  colorTetromino(tetromino, newRotation);  
+  let rotation = tetromino[currentRotation++ % tetromino.length];
+  let newRotation = colorTetromino(tetromino, rotation);  
   if (currentRotation > 3) {
     currentRotation = 0;
   }
-  console.log(newRotation);
+  console.log(rotation);
   return newRotation; 
 }
 
+// rotate tetromino counter-clockwise
 function rotateLeft () {
-  let newRotation = tetromino[currentRotation--];
-  colorTetromino(tetromino, newRotation); 
+  let rotation = tetromino[currentRotation--];
+  let newRotation = colorTetromino(tetromino, rotation); 
   if (currentRotation < 0) {
     currentRotation = 3;
   }
-  console.log(newRotation);
+  console.log(rotation);
   return newRotation;  
 }
 
+// move tetromino to the right 
 function moveRight () {
   console.log(currentPosition++);
   colorTetromino(tetromino, rotateTetromino); 
 }
 
+// move tetromino to the left 
 function moveLeft () {
   console.log(currentPosition--); 
   colorTetromino(tetromino, rotateTetromino); 
 }
 
 // make the tetromino move down every second 
-// timerID = setInterval(moveDown, 1000)
+const timerID = setInterval(moveDown, 1000)
 
 function moveDown() {
   eraseTetromino();  
   console.log(currentPosition += 10); 
+  if (currentPosition >= 179) {
+    clearInterval(timerID);  
+  }
   colorTetromino(tetromino, rotateTetromino); 
 }
