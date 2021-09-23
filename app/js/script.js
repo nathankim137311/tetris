@@ -145,51 +145,55 @@ function eraseTetromino () {
 window.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowUp') {
     eraseTetromino(); 
-    rotateRight(); 
+    currentRotation = rotateRight(); 
+    rotateTetromino = tetromino[currentRotation]; 
+    colorTetromino(tetromino, rotateTetromino);
   } else if (e.key === 'ArrowDown') {
     eraseTetromino(); 
-    rotateLeft(); 
+    currentRotation = rotateLeft(); 
+    rotateTetromino = tetromino[currentRotation]; 
+    colorTetromino(tetromino, rotateTetromino);
   } else if (e.key === 'ArrowRight') {
     eraseTetromino(); 
-    moveRight(); 
+    moveRight();
+    rotateTetromino = tetromino[currentRotation];  
+    colorTetromino(tetromino, rotateTetromino);
   } else if (e.key === 'ArrowLeft') {
     eraseTetromino();
     moveLeft(); 
+    rotateTetromino = tetromino[currentRotation];  
+    colorTetromino(tetromino, rotateTetromino);
   }
 });
 
 // rotate tetromino clockwise
 function rotateRight () {
-  let rotation = tetromino[currentRotation++ % tetromino.length];
-  let newRotation = colorTetromino(tetromino, rotation);  
+  tetromino[currentRotation++ % tetromino.length];
   if (currentRotation > 3) {
     currentRotation = 0;
   }
-  console.log(rotation);
-  return newRotation; 
+  console.log(currentRotation);
+  return currentRotation;
 }
 
 // rotate tetromino counter-clockwise
 function rotateLeft () {
-  let rotation = tetromino[currentRotation--];
-  let newRotation = colorTetromino(tetromino, rotation); 
+  tetromino[currentRotation--];
   if (currentRotation < 0) {
     currentRotation = 3;
   }
-  console.log(rotation);
-  return newRotation;  
+  console.log(currentRotation);
+  return currentRotation;  
 }
 
 // move tetromino to the right 
 function moveRight () {
   console.log(currentPosition++);
-  colorTetromino(tetromino, rotateTetromino); 
 }
 
 // move tetromino to the left 
 function moveLeft () {
   console.log(currentPosition--); 
-  colorTetromino(tetromino, rotateTetromino); 
 }
 
 // make the tetromino move down every second 
