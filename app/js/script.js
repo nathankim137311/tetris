@@ -1,39 +1,29 @@
-console.log('hello everybody'); 
 // variables
 const gameArea = document.getElementById('game-container');
 const divs = document.querySelectorAll('.game-container div')
 const grid = Array.from(document.querySelectorAll('.game-container div')); 
-const start = document.getElementById('start');
+const startBtn = document.getElementById('start');
 
+// grid dimensions
+const rows = 20; 
+const columns = 10; 
 
-start.addEventListener('click', () => {
-  startGame(); 
-})
-
-// functions 
-function startGame () {
-  clearGrid(gameArea);
+startBtn.addEventListener('click', () => {
   createGrid();
-  eraseTetromino(); 
-  generateTetromino(); 
-}
+  createRandomTetromino();
+  draw();
+});
 
 // grid 
 function createGrid () {
-  for (i = 0; i < 10; i++) {
+  for (i = 0; i < columns; i++) {
   let i = 0; 
-  while (i < 20) { 
+  while (i < rows) { 
     let cell = gameArea.appendChild(document.createElement('div'));
     grid.push(cell); 
     i++; 
   }
  }
-}
-
-const clearGrid = (parent) => {
-  while(parent.firstChild) {
-    parent.removeChild(parent.firstChild); 
-  }
 }
 
 // Tetromino blocks
@@ -86,52 +76,50 @@ const iBlock = [
   [2, 12, 22, 32]
 ];
 
+// tetrominos array 
 const tetrominos = [tBlock, lBlock, jBlock, oBlock, sBlock, zBlock, iBlock];
 
 let currentPosition = 0; 
-let currentRotation = 0; 
+let currentTetromino = createRandomTetromino(); 
 
-// generate random shape
-let random = Math.floor(Math.random() * tetrominos.length); 
-let tetromino = tetrominos[random];
-let rotateTetromino = tetromino[currentRotation];
-
-// colors the tetromino 
-function colorTetromino (tetromino, rotateTetromino) {
-  if (tetromino === tBlock) {
-    rotateTetromino.forEach(index => {
-      grid[currentPosition + index].classList.add('t-block');
-    }); 
-  } else if (tetromino === lBlock) {
-    rotateTetromino.forEach(index => {
-      grid[currentPosition + index].classList.add('l-block');
-    }); 
-  } else if (tetromino === jBlock) {
-    rotateTetromino.forEach(index => {
-      grid[currentPosition + index].classList.add('j-block');
-    }); 
-  } else if (tetromino === oBlock) {
-    rotateTetromino.forEach(index => {
-      grid[currentPosition + index].classList.add('o-block');
-    }); 
-  } else if (tetromino === sBlock) {
-    rotateTetromino.forEach(index => {
-      grid[currentPosition + index].classList.add('s-block');
-    }); 
-  } else if (tetromino === zBlock) {
-    rotateTetromino.forEach(index => {
-      grid[currentPosition + index].classList.add('z-block');
-    }); 
-  } else if (tetromino === iBlock) {
-    rotateTetromino.forEach(index => {
-      grid[currentPosition + index].classList.add('i-block');
-    }); 
-  } 
+// creates random tetromino
+function createRandomTetromino() {
+  let random = Math.floor(Math.random() * tetrominos.length); 
+  return tetrominos[random][random]
 }
 
-// tetromino with color
-function generateTetromino () {
-  colorTetromino(tetromino, rotateTetromino); 
+// colors the tetromino 
+function draw() {
+  switch(currentTetromino) {
+    case tBlock.forEach(rotation => rotation):
+      currentTetromino.forEach(square => {
+        grid[currentPosition + square].classList.add('t-block')});
+      break; 
+    case lBlock.forEach(rotation => rotation):
+      currentTetromino.forEach(square => {
+        grid[currentPosition + square].classList.add('l-block')});
+      break;
+    case jBlock.forEach(rotation => rotation):
+      currentTetromino.forEach(square => {
+        grid[currentPosition + square].classList.add('j-block')});
+      break; 
+    case oBlock.forEach(rotation => rotation):
+      currentTetromino.forEach(square => {
+        grid[currentPosition + square].classList.add('o-block')});
+      break; 
+    case sBlock.forEach(rotation => rotation):
+      currentTetromino.forEach(square => {
+        grid[currentPosition + square].classList.add('s-block')});
+      break; 
+    case zBlock.forEach(rotation => rotation):
+      currentTetromino.forEach(square => {
+        grid[currentPosition + square].classList.add('z-block')});
+      break;  
+    case iBlock.forEach(rotation => rotation):
+      currentTetromino.forEach(square => {
+        grid[currentPosition + square].classList.add('i-block')});
+      break; 
+  }
 }
 
 // erase the tetromino
@@ -144,28 +132,13 @@ function eraseTetromino () {
 // tetromino controls 
 window.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowUp') {
-    eraseTetromino(); 
-    currentRotation = rotateRight(); 
-    rotateTetromino = tetromino[currentRotation]; 
-    colorTetromino(tetromino, rotateTetromino);
   } else if (e.key === 'ArrowDown') {
-    eraseTetromino(); 
-    currentRotation = rotateLeft(); 
-    rotateTetromino = tetromino[currentRotation]; 
-    colorTetromino(tetromino, rotateTetromino);
   } else if (e.key === 'ArrowRight') {
-    eraseTetromino(); 
-    moveRight();
-    rotateTetromino = tetromino[currentRotation];  
-    colorTetromino(tetromino, rotateTetromino);
   } else if (e.key === 'ArrowLeft') {
-    eraseTetromino();
-    moveLeft(); 
-    rotateTetromino = tetromino[currentRotation];  
-    colorTetromino(tetromino, rotateTetromino);
   }
 });
 
+/*
 // rotate tetromino clockwise
 function rotateRight () {
   tetromino[currentRotation++ % tetromino.length];
@@ -207,3 +180,4 @@ function moveDown() {
   }
   colorTetromino(tetromino, rotateTetromino); 
 }
+*/
