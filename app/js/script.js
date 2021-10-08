@@ -85,16 +85,28 @@ let currentTetromino = createRandomTetromino();
 function createRandomTetromino() {
   let random = Math.floor(Math.random() * tetrominos.length); 
   let randomRotation = Math.floor(Math.random() * 4); 
-  return tetrominos[random][randomRotation];
+  return tetrominos[random];
 }
 
 let rotation = 0;
 
 // colors the tetromino 
-function draw() {
-  let currentTetromino = createRandomTetromino(); 
-  currentTetromino.forEach(square => {
-  grid[tetromino.currentX + tetromino.currentY + square].classList.add('t-block')});
+function draw(currentTetromino) {
+  for(let x = 0; x < tetrominos.length; x++) {
+        switch(currentTetromino) {
+          case tetrominos[0]:
+            currentTetromino[rotation].forEach(square => {
+              grid[tetromino.currentX + tetromino.currentY + square].classList.add('t-block')});
+        }
+  }
+}
+
+
+// erases the tetromino
+function erase() {
+  for (i = 0; i < grid.length; i++) {
+    grid[i].classList.remove('t-block', 'l-block', 'j-block', 'o-block', 's-block', 'z-block', 'i-block');
+  }
 }
 
 startBtn.addEventListener('click', () => {
@@ -104,12 +116,8 @@ startBtn.addEventListener('click', () => {
   draw();
 });
 
-// erase the tetromino
-function erase() {
-  for (i = 0; i < grid.length; i++) {
-    grid[i].classList.remove('t-block', 'l-block', 'j-block', 'o-block', 's-block', 'z-block', 'i-block');
-  }
-}
+
+
 
 /*
 // tetromino controls 
