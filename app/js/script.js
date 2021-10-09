@@ -71,7 +71,7 @@ const iBlock = [
   [2, 12, 22, 32]
 ];
 
-const tetromino = {
+let tetromino = {
   currentX: 3,
   currentY: 10,
 }
@@ -79,16 +79,17 @@ const tetromino = {
 // tetrominos array 
 const tetrominos = [tBlock, lBlock, jBlock, oBlock, sBlock, zBlock, iBlock];
 
-let currentTetromino = createRandomTetromino();
+const randomTetromino = createRandomTetromino();
+let currentBlock = randomTetromino[0];
+let currentRotation = randomTetromino[2];
+let currentTetromino = currentBlock[currentRotation]
 
 // creates random tetromino
 function createRandomTetromino() {
-  let random = Math.floor(Math.random() * tetrominos.length); 
-  let randomRotation = Math.floor(Math.random() * 4); 
-  return tetrominos[random][randomRotation];
+  let randomBlock = Math.floor(Math.random() * tetrominos.length); 
+  let currentRotation = Math.floor(Math.random() * 4); 
+  return [tetrominos[randomBlock], tetrominos[randomBlock][currentRotation], currentRotation];
 }
-
-let rotation = 0;
 
 // colors the tetromino 
 function draw() {
@@ -131,7 +132,6 @@ function draw() {
 startBtn.addEventListener('click', () => {
   erase(); 
   createRandomTetromino();
-  console.log(createRandomTetromino());
   draw();
 });
 
@@ -142,19 +142,30 @@ function erase() {
   }
 }
 
-/*
 // tetromino controls 
 window.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowUp') {
+    erase();
+    rotateRight();
+    draw();
   } else if (e.key === 'ArrowDown') {
+    erase();
+    rotateLeft();
+    draw(); 
   } else if (e.key === 'ArrowRight') {
+    erase();
+    tetromino.currentX += 1;
+    draw(); 
   } else if (e.key === 'ArrowLeft') {
-  }
+    erase(); 
+    tetromino.currentX -= 1;
+    draw();
+    }
 });
 
 // rotate tetromino clockwise
 function rotateRight () {
-  tetromino[currentRotation++ % tetromino.length];
+  currentTetromino = currentBlock[currentRotation++ % 4];
   if (currentRotation > 3) {
     currentRotation = 0;
   }
@@ -164,7 +175,7 @@ function rotateRight () {
 
 // rotate tetromino counter-clockwise
 function rotateLeft () {
-  tetromino[currentRotation--];
+  currentTetromino = currentBlock[currentRotation--];
   if (currentRotation < 0) {
     currentRotation = 3;
   }
@@ -172,6 +183,7 @@ function rotateLeft () {
   return currentRotation;  
 }
 
+/*
 // move tetromino to the right 
 function moveRight () {
   console.log(currentPosition++);
