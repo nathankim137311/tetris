@@ -79,7 +79,7 @@ const tetromino = {
 // tetrominos array 
 const tetrominos = [tBlock, lBlock, jBlock, oBlock, sBlock, zBlock, iBlock];
 
-let currentTetromino = createRandomTetromino(); 
+let currentTetromino = createRandomTetromino();
 
 // creates random tetromino
 function createRandomTetromino() {
@@ -92,9 +92,40 @@ let rotation = 0;
 
 // colors the tetromino 
 function draw() {
-  let currentTetromino = createRandomTetromino(); 
-  currentTetromino.forEach(square => {
-  grid[tetromino.currentX + tetromino.currentY + square].classList.add('t-block')});
+  let i = 0;
+  while(i < 4) {
+    switch (currentTetromino) {
+      case tBlock[i]:
+        currentTetromino.forEach(square => {
+        grid[tetromino.currentX + tetromino.currentY + square].classList.add('t-block')});
+        break; 
+      case lBlock[i]:
+        currentTetromino.forEach(square => {
+        grid[tetromino.currentX + tetromino.currentY + square].classList.add('l-block')});
+        break; 
+      case jBlock[i]:
+        currentTetromino.forEach(square => {
+        grid[tetromino.currentX + tetromino.currentY + square].classList.add('j-block')});
+        break; 
+      case oBlock[i]:
+        currentTetromino.forEach(square => {
+        grid[tetromino.currentX + tetromino.currentY + square].classList.add('o-block')});
+        break; 
+      case sBlock[i]:
+        currentTetromino.forEach(square => {
+        grid[tetromino.currentX + tetromino.currentY + square].classList.add('s-block')});
+        break; 
+      case zBlock[i]:
+        currentTetromino.forEach(square => {
+        grid[tetromino.currentX + tetromino.currentY + square].classList.add('z-block')});
+        break; 
+      case iBlock[i]:
+        currentTetromino.forEach(square => {
+        grid[tetromino.currentX + tetromino.currentY + square].classList.add('i-block')});
+        break; 
+    }
+    i++; 
+  }
 }
 
 startBtn.addEventListener('click', () => {
