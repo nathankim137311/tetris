@@ -133,6 +133,7 @@ startBtn.addEventListener('click', () => {
   erase(); 
   createRandomTetromino();
   draw();
+  const timerID = setInterval(moveDown, 1000)
 });
 
 // erase the tetromino
@@ -169,7 +170,6 @@ function rotateRight () {
   if (currentRotation > 3) {
     currentRotation = 0;
   }
-  console.log(currentRotation);
   return currentRotation;
 }
 
@@ -179,30 +179,15 @@ function rotateLeft () {
   if (currentRotation < 0) {
     currentRotation = 3;
   }
-  console.log(currentRotation);
   return currentRotation;  
 }
 
-/*
-// move tetromino to the right 
-function moveRight () {
-  console.log(currentPosition++);
-}
-
-// move tetromino to the left 
-function moveLeft () {
-  console.log(currentPosition--); 
-}
-
 // make the tetromino move down every second 
-const timerID = setInterval(moveDown, 1000)
-
 function moveDown() {
-  eraseTetromino();  
-  console.log(currentPosition += 10); 
-  if (currentPosition >= 179) {
+  erase();  
+  tetromino.currentY += 10; 
+  if (tetromino.currentY >= 179) {
     clearInterval(timerID);  
   }
-  colorTetromino(tetromino, rotateTetromino); 
+  draw(); 
 }
-*/
