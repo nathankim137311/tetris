@@ -133,7 +133,6 @@ function draw() {
 }
 
 startBtn.addEventListener('click', () => {
-  createRandomTetromino();
   draw();
   const timerID = setInterval(moveDown, 500)
 });
@@ -152,15 +151,25 @@ window.addEventListener('keydown', (e) => {
   } else if (e.key === 'ArrowDown') {
     moveDown();
   } else if (e.key === 'ArrowRight') {
-    erase();
-    tetromino.currentX += 1;
-    draw(); 
+    moveRight(); 
   } else if (e.key === 'ArrowLeft') {
-    erase(); 
-    tetromino.currentX -= 1;
-    draw();
+    moveLeft();
     }
 });
+
+// move tetromino right
+function moveRight() {
+  erase();
+  tetromino.currentX += 1;
+  draw(); 
+}
+
+// move tetrominio left 
+function moveLeft() {
+  erase(); 
+  tetromino.currentX -= 1;
+  draw();
+}
 
 // rotate tetromino clockwise
 function rotateRight () {
