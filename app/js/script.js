@@ -8,6 +8,7 @@ const startBtn = document.getElementById('start');
 const rows = 20; 
 const columns = 10; 
 createGrid();
+createDivs(); 
 
 // grid 
 function createGrid () {
@@ -17,9 +18,21 @@ function createGrid () {
     let cell = gameArea.appendChild(document.createElement('div'));
     grid.push(cell); 
     i++; 
+    }
   }
- }
 }
+
+// adds 20 divs with class taken to the end of array
+function createDivs() {
+  let i = 0; 
+  while (i < 20) {
+    let cell = gameArea.appendChild(document.createElement('div'));
+    let takenDivs = cell.classList.add('taken');
+    grid.push(takenDivs) 
+    i++;
+  }
+}
+
 
 // Tetromino blocks
 const tBlock = [
@@ -138,7 +151,7 @@ startBtn.addEventListener('click', () => {
 
 // erase the tetromino
 function erase() {
-  for (i = 0; i < grid.length; i++) {
+  for (let i = 0; i < grid.length; i++) {
     grid[i].classList.remove('t-block', 'l-block', 'j-block', 'o-block', 's-block', 'z-block', 'i-block');
   }
 }
@@ -146,6 +159,7 @@ function erase() {
 // tetromino controls 
 window.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowUp') {
+    console.log('ass')
     erase();
     rotateRight();
     draw();
@@ -187,7 +201,21 @@ function moveDown() {
   erase();  
   tetromino.currentY += 10; 
   if (tetromino.currentY >= 179) {
+    currentTetromino.forEach(index => grid[tetromino.currentX + index].classList.add('taken')); 
     clearInterval(timerID);  
   }
   draw(); 
+  freeze(); 
+}
+
+//freeze function 
+function freeze() {
+  if(currentTetromino.some(index => grid[tetromino.currentX + index + 10].classList.contains('taken'))) {
+    currentTetromino.forEach(index => grid[tetromino.currentX + index].classList.add('taken')); 
+    // start a new tetromino falling
+    // random = Math.floor(Math.random() * theTetrominoes.length)
+    // current = theTetrominoes[random][currentRotation];
+    // currentPosition = 4
+    // draw(); 
+  }
 }

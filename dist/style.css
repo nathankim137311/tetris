@@ -108,6 +108,12 @@ body {
   height: 600px;
   width: 300px;
   border: white 1px solid;
+  overflow: hidden;
+}
+
+#game-container div {
+  height: 30px;
+  width: 30px;
 }
 
 .t-block {
