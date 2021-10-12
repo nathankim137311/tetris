@@ -8,7 +8,6 @@ const rows = 22;
 const columns = 10; 
 createGrid();
 addClassTaken(); 
-console.log(grid);
 
 // grid 
 function createGrid () {
@@ -160,14 +159,25 @@ window.addEventListener('keydown', (e) => {
 // move tetromino right
 function moveRight() {
   erase();
-  tetromino.currentX += 1;
+  const isAtRightEdge = currentTetromino.some(index => (tetromino.currentX + index) % 10 === 10 -1);
+  if(!isAtRightEdge) {
+    tetromino.currentX += 1; 
+  }
+  if(currentTetromino.some(index => grid[tetromino.currentX + tetromino.currentY + index].classList.contains('taken'))) {
+    tetromino.currentX -= 1;
+  }
   draw(); 
 }
 
 // move tetrominio left 
 function moveLeft() {
   erase(); 
-  tetromino.currentX -= 1;
+  const isAtLeftEdge = currentTetromino.some(index => (tetromino.currentX + index) % 10 === 0);
+  if(!isAtLeftEdge)
+    tetromino.currentX -= 1; 
+  if(currentTetromino.some(index => grid[tetromino.currentX + tetromino.currentY + index].classList.contains('taken'))) {
+    tetromino.currentX -= 1;
+  }
   draw();
 }
 
@@ -183,13 +193,13 @@ function rotateRight () {
 }
 
 // rotate tetromino counter-clockwise
-function rotateLeft () {
-  currentTetromino = currentRotation--;
-  if (currentRotation < 0) {
-    currentRotation = 3;
-  }
-  return currentRotation;  
-}
+//function rotateLeft () {
+//  currentTetromino = currentRotation--;
+//  if (currentRotation < 0) {
+//    currentRotation = 3;
+//  }
+//  return currentRotation;  
+//}
 
 // make the tetromino move down every second 
 function moveDown() {
@@ -212,4 +222,6 @@ function freeze() {
     draw(); 
   }
 }
+
+// prevent tetromino from touching the sides 
 
